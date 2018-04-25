@@ -15,8 +15,8 @@ def getdata():
     Z=[]
     for line in lines:
         s1,s2,s3 = line.split(",")
-        X.append(int(s1))
-        Y.append(int(s2))
+        X.append(float(s1))
+        Y.append(float(s2))
         Z.append(float(s3))
     return np.array(X),np.array(Y),np.array(Z)
 def main():
@@ -24,7 +24,7 @@ def main():
     x,y,z = getdata()
 
     # Fit a 3rd order, 2d polynomial
-    m = polyfit2d(x,y,z,4)
+    m = polyfit2d(x,y,z,3)
 
     # Evaluate it on a grid...
     nx, ny = 512, 512
@@ -47,7 +47,7 @@ def polyfit2d(x, y, z, order=3):
     ij = itertools.product(range(order+1), range(order+1))
     for k, (i,j) in enumerate(ij):
         G[:,k] = x**i * y**j
-    m, _, _, _ = np.linalg.lstsq(G, z,rcond=None)
+    m, _, _, _ = np.linalg.lstsq(G, z,rcond=-1)
     return m
 
 def polyval2d(x, y, m):
