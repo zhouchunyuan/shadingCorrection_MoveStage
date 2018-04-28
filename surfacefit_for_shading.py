@@ -46,6 +46,16 @@ def main():
     im = Image.fromarray(zz)
     im.save('shadingCorrection.tif')# show how to save as tif with original data
 
+    ######################### create a no-margin tif ################
+    ######################### the edge is less affected #############
+    xx0, yy0 = np.meshgrid(np.linspace(x.min(), x.max(), nx), 
+                           np.linspace(y.min(), y.max(), ny))
+
+    zz = polyval2d(xx0, yy0, m)
+
+    im = Image.fromarray(zz)
+    im.save('shadingCorrection_soft.tif')# show how to save as tif with original data
+
 def polyfit2d(x, y, z, order=3):
     ncols = (order + 1)**2
     G = np.zeros((x.size, ncols))
