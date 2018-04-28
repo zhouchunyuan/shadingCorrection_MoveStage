@@ -23,22 +23,20 @@ def main():
     
     x,y,z = getdata()
 
-    #XY step size, there are N = sqrt(len(x)) points
-    #but the gap number is N-1
-    xystep = (x.max()-x.min())/(np.sqrt(len(x))-1)
     
     # Fit a 3rd order, 2d polynomial
     m = polyfit2d(x,y,z,4)
 
     # Evaluate it on a grid...
+    # the range is fixed to 0...1
     nx, ny = 512, 512
-    xx, yy = np.meshgrid(np.linspace(x.min()-xystep/2, x.max()+xystep/2, nx), 
-                         np.linspace(y.min()-xystep/2, y.max()+xystep/2, ny))
+    xx, yy = np.meshgrid(np.linspace(0, 1, nx), 
+                         np.linspace(0, 1, ny))
 
     zz = polyval2d(xx, yy, m)
 
     # Plot
-    plt.imshow(zz, extent=(x.min()-xystep/2, y.max()+xystep/2, x.max()+xystep/2, y.min()-xystep/2))
+    plt.imshow(zz, extent=(0,1,1,0))
     #matplotlib.image.imsave('name.png', zz)
     plt.scatter(x, y, c=z)
     plt.show()
