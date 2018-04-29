@@ -41,8 +41,7 @@ def main():
     plt.scatter(x, y, c=z)
     plt.show()
 
-    im = Image.fromarray(zz)
-    im.save('shadingCorrection.tif')# show how to save as tif with original data
+    saveImgs(zz,'shadingCorrection.tif')
 
     ######################### create a no-margin tif ################
     ######################### the edge is less affected #############
@@ -51,9 +50,17 @@ def main():
 
     zz = polyval2d(xx0, yy0, m)
 
-    im = Image.fromarray(zz)
-    im.save('shadingCorrection_soft.tif')# show how to save as tif with original data
+    saveImgs(zz,'shadingCorrection_soft.tif')
 
+# change float array z to int
+# sale the maximum to be 1000
+# save it to tif image
+def saveImgs(z,name):
+    mx = np.amax(z)
+    z1 = 1000/mx*z;
+    im = Image.fromarray(z1.astype(np.uint16))
+    im.save(name,'tiff')
+    
 def polyfit2d(x, y, z, order=3):
     ncols = (order + 1)**2
     G = np.zeros((x.size, ncols))
