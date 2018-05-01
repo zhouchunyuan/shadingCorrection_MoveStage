@@ -1,0 +1,5 @@
+通常均匀的标本已经可以看出shading的情况
+本例采用简化的高斯拟合：Amp* exp(-[(x-x0)^2+(y-y0)^2]/c^2)
+仅仅对amp,x0,y0,c进行拟合。
+输入文件名：sample.tif(放大.py 或exe的同目录下)
+输出文件名：fitting.tif
