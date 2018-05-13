@@ -102,7 +102,7 @@ public class GaussianFit_image implements PlugIn {
                         double modelI = amp*Math.exp(-((x-x0)*(x-x0)+(y-y0)*(y-y0))/(sigma*sigma));
 
                         value.setEntry(i,modelI);
-                        // derivative with respect to p0 = x center
+                        // derivative on (amp,x0,y0,sigma) with respect to each point
                         jacobian.setEntry(i, 0, modelI/amp);
                         jacobian.setEntry(i, 1, modelI*2*(x-x0));
                         jacobian.setEntry(i, 2, modelI*2*(y-y0));
@@ -135,7 +135,7 @@ public class GaussianFit_image implements PlugIn {
             xc = xc/sum;
             yc = yc/sum;
 
-            // least squares problem to solve : modeled radius should be close to target radius
+            // least squares problem to solve : modeled gaussian intensity distribution
             LeastSquaresProblem problem = new LeastSquaresBuilder().
             start(new double[] { maxIntensity,xc,yc,sigma_}).
             model(GaussianIntensity).
