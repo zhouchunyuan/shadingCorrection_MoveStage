@@ -1,3 +1,6 @@
+/*******************
+This macro is to visualize the "shadingSample.txt"
+*******************/
 str = getDataString();
 size = countLine(str);
 X = newArray(size);
