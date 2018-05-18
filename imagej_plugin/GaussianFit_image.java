@@ -4,6 +4,7 @@ import ij.process.*;
 import ij.gui.*;
 import java.awt.*;
 import ij.plugin.*;
+import ij.io.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -67,11 +68,14 @@ public class GaussianFit_image implements PlugIn {
         public void run(String arg) {
 
             ///////////////////////////////////
-            JFileChooser fc = new JFileChooser();
-            fc.setDialogTitle("Open ShadingSample.txt");
-            int returnVal = fc.showOpenDialog(IJ.getApplet());
-
-            String dataString = readFile(fc.getSelectedFile().getPath());
+            //JFileChooser fc = new JFileChooser();
+            //fc.setDialogTitle("Open ShadingSample.txt");
+            //int returnVal = fc.showOpenDialog(IJ.getApplet());
+            //String dataString = readFile(fc.getSelectedFile().getPath());
+            
+            OpenDialog od = new OpenDialog("Open ShadingSample.txt");
+            IJ.log(od.getPath());
+            String dataString = readFile(od.getPath());
             String dataLines[] = dataString.split("\n");
 
             pixArray = new Array2DRowRealMatrix(dataLines.length, 3);
