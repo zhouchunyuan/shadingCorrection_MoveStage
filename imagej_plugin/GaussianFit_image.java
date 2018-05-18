@@ -141,8 +141,8 @@ public class GaussianFit_image implements PlugIn {
             model(GaussianIntensity).
             target(prescribedGuassian).
             lazyEvaluation(false).
-            maxEvaluations(1000).
-            maxIterations(1000).
+            maxEvaluations(20000).
+            maxIterations(20000).
             build();
             LeastSquaresOptimizer.Optimum optimum = new LevenbergMarquardtOptimizer().optimize(problem);
             RealVector ans = new ArrayRealVector(new double[] {
